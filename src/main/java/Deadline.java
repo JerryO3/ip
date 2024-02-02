@@ -35,4 +35,8 @@ public class Deadline extends Item{
     public String toString() {
         return "[D][" + printChecked(this.isDone)+ "] " + this.name + " " + "(by: " + this.doneBy +")";
     }
+
+    public String toSaveFormat() {
+        return "D" + "|" + saveIsDone(this.isDone) + "|" + this.name + "|" + this.doneBy;
+    }
 }

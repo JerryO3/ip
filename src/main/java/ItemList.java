@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ItemList {
     private ArrayList<Item> listOfItems = new ArrayList<Item>();
@@ -30,6 +31,24 @@ public class ItemList {
         return listOfItems.get(itemCount-1).addMessage(itemCount);
     }
 
+    String addDeadline(String[] info, int index) throws CustomExceptions{
+        listOfItems.add(index, new Deadline(info));
+        itemCount++;
+        return listOfItems.get(itemCount-1).addMessage(itemCount);
+    }
+
+    String addToDo(String[] name, int index) {
+        listOfItems.add(index, new ToDo(name));
+        itemCount++;
+        return listOfItems.get(itemCount-1).addMessage(itemCount);
+    }
+
+    String addEvent(String[] info, int index) throws CustomExceptions {
+        listOfItems.add(index, new Event(info));
+        itemCount++;
+        return listOfItems.get(itemCount-1).addMessage(itemCount);
+    }
+
     String removeItem(int index) throws CustomExceptions {
         String s = "";
         try {
@@ -52,5 +71,11 @@ public class ItemList {
             c++;
         }
         return out.trim();
+    }
+
+    public ArrayList<Item> getListOfItems() {
+        ArrayList<Item> out = new ArrayList<>();
+        Collections.copy(this.listOfItems, out);
+        return out;
     }
 }

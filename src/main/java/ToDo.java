@@ -22,4 +22,8 @@ public class ToDo extends Item{
     public String toString() {
         return "[T][" + printChecked(this.isDone)+ "] " + this.name;
     }
+
+    public String toSaveFormat() {
+        return "T" + "|" + saveIsDone(this.isDone) + "|" + this.name;
+    }
 }

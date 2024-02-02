@@ -48,4 +48,8 @@ public class Event extends Item {
         return "[E]["
                 + printChecked(this.isDone) + "] " + this.name + " " + "(from: " + this.start + " to: " + this.end+ ")";
     }
+
+    public String toSaveFormat() {
+        return "E" + "|" + saveIsDone(this.isDone) + "|" + this.name + "|" + this.start + "|" + this.end;
+    }
 }

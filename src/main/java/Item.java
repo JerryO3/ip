@@ -20,6 +20,10 @@ public abstract class Item {
         return b ? "X" : " ";
     }
 
+    String saveIsDone(boolean b) {
+        return b ? "1" : " ";
+    }
+
     String addMessage(int num) {
         return "Got it. I've added this task:\n" +
                 "       " + this.toString() +
@@ -32,7 +36,8 @@ public abstract class Item {
                 "\n     Now you have " + num +  " tasks in the list.";
     }
 
-
     @Override
     public abstract String toString();
+
+    public abstract String toSaveFormat();
 }
