@@ -6,11 +6,10 @@ import java.util.Scanner;
 
 public class SaveAndLoad {
 
-
-    public static void saveToFile(String filePath, String textToAdd) throws IOException {
+    public static void saveToFile(ItemList l) {
         try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(textToAdd);
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            fw.write(toSaveFormat(l));
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -27,7 +26,7 @@ public class SaveAndLoad {
         return out.trim();
     }
 
-    public static ArrayList<String> readFile(String filePath) throws IOException {
+    private static ArrayList<String> readFile(String filePath) throws IOException {
         ArrayList<String> lst = new ArrayList<>();
         try {
             File f = new File(filePath);
@@ -36,31 +35,39 @@ public class SaveAndLoad {
             while (s.hasNext()) {
                 lst.add(s.nextLine());
             }
-            return lst;
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
-            return null;
         }
+        return lst;
     }
 
-    public static ItemList loadFromFile(ArrayList<String> lst) throws CustomExceptions {
+    public static ItemList loadFromFile() {
         ItemList il = new ItemList();
-        for (String s : lst) {
-            String[] tmp = s.split("@");
-            String[] arr = tmp[1].split("|");
-            int index = Integer.parseInt(arr[0]);
-            switch (arr.length) {
-                case 3:
-                    il.addToDo(arr, index);
-                    break;
-                case 4:
-                    il.addDeadline(arr, index);
-                    break;
-                case 5:
-                    il.addEvent(arr, index);
-                    break;
+        try {
+            for (String s : readFile("./data/duke.txt")) {
+                String[] tmp = s.split("@");
+                String[] arr = tmp[2].split("\\|");
+                int index = Integer.parseInt(tmp[0]);
+                boolean isDone = Integer.parseInt(tmp[1]) == 1;
+                switch (arr.length) {
+                    case 2:
+                        il.addToDo(arr, index, isDone);
+                        break;
+                    case 3:
+                        il.addDeadline(arr, index, isDone);
+                        break;
+                    case 4:
+                        il.addEvent(arr, index, isDone);
+                        break;
+                }
             }
+        } catch (IOException e) {
+            System.out.println("No file found, creating new file. ");
+        } catch (CustomExceptions e) {
+            System.out.println("File Corrupted");
+            return new ItemList();
         }
         return il;
     }
+
 }

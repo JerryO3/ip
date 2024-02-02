@@ -8,6 +8,11 @@ public class ToDo extends Item{
         this.name = this.name.trim();
     }
 
+    public ToDo(String[] info, boolean isDone) {
+        this(info);
+        this.isDone = isDone;
+    }
+
     @Override
     public void markDone() {
         this.isDone = true;
@@ -24,6 +29,6 @@ public class ToDo extends Item{
     }
 
     public String toSaveFormat() {
-        return "T" + "|" + saveIsDone(this.isDone) + "|" + this.name;
+        return saveIsDone(this.isDone) + "@T|" + this.name;
     }
 }

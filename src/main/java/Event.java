@@ -34,6 +34,11 @@ public class Event extends Item {
         }
     }
 
+    public Event(String[] info, boolean isDone) throws CustomExceptions {
+        Event e = new Event(info);
+        e.isDone = isDone;
+    }
+
     @Override
     public void markDone() {
         this.isDone = true;
@@ -50,6 +55,6 @@ public class Event extends Item {
     }
 
     public String toSaveFormat() {
-        return "E" + "|" + saveIsDone(this.isDone) + "|" + this.name + "|" + this.start + "|" + this.end;
+        return saveIsDone(this.isDone) + "@E|" + this.name + "|" + this.start + "|" + this.end;
     }
 }

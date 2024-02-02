@@ -31,19 +31,19 @@ public class ItemList {
         return listOfItems.get(itemCount-1).addMessage(itemCount);
     }
 
-    String addDeadline(String[] info, int index) throws CustomExceptions{
-        listOfItems.add(index, new Deadline(info));
+    String addDeadline(String[] info, int index, boolean isDone) throws CustomExceptions{
+        listOfItems.add(index, new Deadline(info, isDone));
         itemCount++;
         return listOfItems.get(itemCount-1).addMessage(itemCount);
     }
 
-    String addToDo(String[] name, int index) {
-        listOfItems.add(index, new ToDo(name));
+    String addToDo(String[] name, int index, boolean isDone) {
+        listOfItems.add(index, new ToDo(name, isDone));
         itemCount++;
         return listOfItems.get(itemCount-1).addMessage(itemCount);
     }
 
-    String addEvent(String[] info, int index) throws CustomExceptions {
+    String addEvent(String[] info, int index, boolean isDone) throws CustomExceptions {
         listOfItems.add(index, new Event(info));
         itemCount++;
         return listOfItems.get(itemCount-1).addMessage(itemCount);
@@ -74,8 +74,6 @@ public class ItemList {
     }
 
     public ArrayList<Item> getListOfItems() {
-        ArrayList<Item> out = new ArrayList<>();
-        Collections.copy(this.listOfItems, out);
-        return out;
+        return this.listOfItems;
     }
 }

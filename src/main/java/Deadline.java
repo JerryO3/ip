@@ -21,6 +21,11 @@ public class Deadline extends Item{
         }
     }
 
+    public Deadline(String[] info, boolean isDone) throws CustomExceptions {
+        Deadline d = new Deadline(info);
+        d.isDone = isDone;
+    }
+
     @Override
     public void markDone() {
         this.isDone = true;
@@ -37,6 +42,6 @@ public class Deadline extends Item{
     }
 
     public String toSaveFormat() {
-        return "D" + "|" + saveIsDone(this.isDone) + "|" + this.name + "|" + this.doneBy;
+        return saveIsDone(this.isDone) + "@D|" + this.name + "|" + this.doneBy;
     }
 }

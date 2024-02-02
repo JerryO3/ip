@@ -4,9 +4,9 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(Greet.logo);
         System.out.println(FormatOutput.format(Greet.greet));
+        ItemList itemList = SaveAndLoad.loadFromFile();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        ItemList itemList = new ItemList();
 
         while (!command.equals("bye")) {
             String[] splitted = command.split(" ");
@@ -109,5 +109,6 @@ public class Duke {
             command = sc.nextLine();
         }
         System.out.println(FormatOutput.format(Greet.bye));
+        SaveAndLoad.saveToFile(itemList);
     }
 }

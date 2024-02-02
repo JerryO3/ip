@@ -21,7 +21,7 @@ public abstract class Item {
     }
 
     String saveIsDone(boolean b) {
-        return b ? "1" : " ";
+        return b ? "1" : "0";
     }
 
     String addMessage(int num) {
